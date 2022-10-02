@@ -1,4 +1,7 @@
-interface Operation {
+import {User} from "../User/user";
+import {Account} from "../Account/account";
+
+export interface Operation {
     id : number
     type : string
     amount :number

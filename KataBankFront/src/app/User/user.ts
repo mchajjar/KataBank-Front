@@ -1,4 +1,4 @@
-interface User {
+export interface User {
   cin: number
   name: string
   surname: string

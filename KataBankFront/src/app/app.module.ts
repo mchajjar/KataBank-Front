@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import {AccountComponent} from "./Account/account/account.component";
 import {OperationComponent} from "./Operation/operation/operation.component";
 import {UserComponent} from "./User/user/user.component";
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import {UserComponent} from "./User/user/user.component";
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
