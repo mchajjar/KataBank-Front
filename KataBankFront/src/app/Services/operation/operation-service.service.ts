@@ -14,8 +14,12 @@ export class OperationServiceService {
   constructor(private _httpClient: HttpClient) {
   }
 
-  getAllOperation() : Observable<Operation>{
-    return this._httpClient.get<Operation>(this.url + "/all");
+  getAllOperation() : Observable<Operation[]>{
+    return this._httpClient.get<Operation[]>(this.url + "/all");
+  }
+
+  getAllOperationByAccountId(accountId : number) : Observable<Operation[]>{
+    return this._httpClient.get<Operation[]>(this.url + "/all/"+accountId);
   }
 
   savingOperation(accountId: number , amount : number) : Observable<Operation>{

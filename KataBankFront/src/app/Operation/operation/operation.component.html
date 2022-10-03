@@ -4,12 +4,12 @@
 
 
   <div class="form-group">
-    <label for="Account">Select Account</label>
+    <label for="User">Select User</label>
     <div class="input-group mb-3">
-      <select class="form-select" id="Account" aria-label="Select Account"
-              #mySelect
-              (change)="onSelectedUser(mySelect.value)">
-        <option> chose an account  </option>
+      <select class="form-select" id="User" aria-label="Select User"
+              #mySelectUser
+              (change)="onSelectedUser(mySelectUser.value)">
+        <option> chose a user  </option>
         <option *ngFor="let user of _userList">
           {{user.cin}}- {{user.name}}
         </option>
@@ -19,9 +19,12 @@
 
 
   <div class="form-group">
-    <label for="User">Select User</label>
+    <label for="Account">Select Account</label>
     <div class="input-group mb-3">
-      <select class="form-select" id="User" aria-label="Select User" [disabled]="accountSelected">
+      <select class="form-select" id="Account" aria-label="Select User"
+              #mySelectAccount
+              [disabled]="accountSelected"  (change)="onSelectedAccount(mySelectAccount.value)">>
+        <option> chose an account  </option>
         <option *ngFor="let account of _accountList" selected>{{account.id}}--{{account.type}}</option>
        </select>
     </div>
