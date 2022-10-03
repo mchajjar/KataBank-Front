@@ -10,20 +10,20 @@ import {User} from "../user";
 })
 export class UserComponent implements OnInit {
   form: FormGroup;
-  user : User  ;
-  _userList : any  ;
+  user : User   ;
+  _userList : User[]  ;
   constructor(private  userService : UserServiceService,
   public fb: FormBuilder) {
+    this._userList = [];
+    this.user = <User>{}
       this.form = this.fb.group({
-        CIN: [this.user.cin,Validators.max(8),Validators.pattern('^[0-9][0-9]*')],
+        CIN: [this.user.cin,[Validators.max(8),Validators.pattern('^[0-9][0-9]*')]],
         name: [this.user.name],
         surname: [this.user.surname],
         dateOfBirth: [this.user.dateOfBirth],
         creationDate: [this.user.creationDate],
         jobTitle: [this.user.jobTitle],
       });
-
-
   }
 
   ngOnInit(): void {
@@ -33,8 +33,9 @@ export class UserComponent implements OnInit {
   }
 
   addUser() :void{
-    this.userService.putUser(this.user).subscribe(data =>{
+    this.userService.postUser(this.user).subscribe(data =>{
       console.log(data);
+        this._userList.push(data)
     },
       error => console.log(error)
     )

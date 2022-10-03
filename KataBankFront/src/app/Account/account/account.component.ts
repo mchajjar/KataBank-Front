@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AccountServiceService} from "../../Services/account/account-service.service";
 import {UserServiceService} from "../../Services/user/user-service.service";
 import {User} from "../../User/user";
+import {Account} from "../account";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-account',
@@ -9,11 +11,24 @@ import {User} from "../../User/user";
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
-
-  _userList : any  ;
-  _accountList : any;
+  form: FormGroup;
+  _account : Account;
+  _userList : User[]  ;
+  _accountList : Account[];
   constructor(private accountService : AccountServiceService ,
-              private  userService : UserServiceService) {
+              private  userService : UserServiceService ,
+              public fb: FormBuilder) {
+    this._userList = [];
+    this._accountList = [];
+    this._account = <Account>{}
+    this.form = this.fb.group({
+      id: [this._account.id],
+      type: [this._account.type],
+      surname: [this._account.surname],
+      creationDate: [this._account.creationDate],
+      userId: [this._account.userId],
+    });
+
 
   }
 
@@ -27,5 +42,12 @@ export class AccountComponent implements OnInit {
     })
   }
 
-
+  addAccount() {
+    this.accountService.postAccount(this._account).subscribe(data =>{
+        console.log(data);
+        this._accountList.push(data)
+      },
+      error => console.log(error)
+    )
+  }
 }
