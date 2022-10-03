@@ -14,9 +14,8 @@ export class AccountServiceService {
   constructor(private _httpClient: HttpClient) {
   }
 
-  getAllAccount() : Observable<Account>{
-
-    return this._httpClient.get<Account>(this.url + "/all");
+  getAllAccount() : Observable<Account[]>{
+    return this._httpClient.get<Account[]>(this.url + "/all");
   }
 
   getAccountbyid(accountId : number) : Observable<Account>{
@@ -34,7 +33,6 @@ export class AccountServiceService {
   deleteAccount(accountId : number) : Observable<Account>{
     return this._httpClient.delete<Account>(this.url + "/accountId");
   }
-
 
   findByUserId(userId : number) : Observable<Account[]>{
     return this._httpClient.get<Account[]>(this.url + "/findByUserId/"+userId);
