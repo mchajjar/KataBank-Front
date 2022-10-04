@@ -1,16 +1,17 @@
 <div style="margin: 5em">
 
-<form>
+<form  [formGroup]="form">
 
 
   <div class="form-group">
     <label for="User">Select User</label>
     <div class="input-group mb-3">
       <select class="form-select" id="User" aria-label="Select User"
-              #mySelectUser
-              (change)="onSelectedUser(mySelectUser.value)">
+              [(ngModel)]="operation.userFrom"
+              formControlName="userFrom"
+              (change)="onSelectedUser()">
         <option> chose a user  </option>
-        <option *ngFor="let user of _userList">
+        <option *ngFor="let user of _userList" [ngValue]="user">
           {{user.cin}}- {{user.name}}
         </option>
       </select>
@@ -22,26 +23,41 @@
     <label for="Account">Select Account</label>
     <div class="input-group mb-3">
       <select class="form-select" id="Account" aria-label="Select User"
-              #mySelectAccount
-              [disabled]="accountSelected"  (change)="onSelectedAccount(mySelectAccount.value)">>
+              [(ngModel)]="operation.accountFrom"
+              formControlName="accountFrom"
+              (change)="onSelectedAccount()">>
         <option> chose an account  </option>
-        <option *ngFor="let account of _accountList" selected>{{account.id}}--{{account.type}}</option>
+        <option *ngFor="let account of _accountList" [ngValue]="account">{{account.id}}--{{account.type}}</option>
        </select>
     </div>
   </div>
 
 
   <div class="form-group">
-    <label for="Amount">Amount</label>
-    <input type="number" class="form-control" id="Amount" placeholder="Enter Amount">
+    <label for="amount">Amount</label>
+    <input type="number" class="form-control" id="amount"
+           [(ngModel)]="operation.amount" formControlName="amount"
+           placeholder="EnteraAmount" >
+  </div>
+
+  <div class="form-group">
+    <label for="type">Select Account</label>
+    <div class="input-group mb-3">
+      <select class="form-select" id="type" aria-label="Select type"
+                [(ngModel)]="operation.type" formControlName="type">
+          <option *ngFor="let selectedObj of languageObjects" [ngValue]="selectedObj">{{selectedObj}}</option>
+      </select>
+    </div>
   </div>
   <div class="form-group">
-    <label for="opsType">opsType</label>
-    <input type="text" class="form-control" id="opsType" placeholder="Enter Ops Type">
+    <label for="amountops">Amount operation</label>
+    <input type="text" class="form-control" id="amountops"
+           [(ngModel)]="amountOps" formControlName="amountOps"
+           placeholder="Enter amountops">
   </div>
 
 
-  <button type="submit" class="btn btn-primary">Save</button>
+  <button type="submit" class="btn btn-primary" (click)="execOps()">Execute Ops</button>
 </form>
 </div>
 

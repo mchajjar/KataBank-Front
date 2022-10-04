@@ -23,11 +23,11 @@ export class OperationServiceService {
   }
 
   savingOperation(accountId: number , amount : number) : Observable<Operation>{
-    return this._httpClient.post<Operation>(this.url + "/withdraw/"+accountId+"/"+amount,null);
+    return this._httpClient.post<Operation>(this.url + "/addsaving/"+accountId+"/"+amount,null);
   }
 
   withdrawOperation(accountId: number , amount : number) : Observable<Operation>{
-    return this._httpClient.post<Operation>(this.url + "/addsaving"+"/withdraw/"+accountId+"/"+amount,null);
+    return this._httpClient.post<Operation>(this.url + "/withdraw/"+accountId+"/"+amount,null);
   }
 
 
